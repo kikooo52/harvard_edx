@@ -1,0 +1,64 @@
+textarea {
+    min-height: 600px;
+}
+.container-fluid {
+    margin: 10px 10px;
+}
+.nav .nav-item button {
+    margin-right: 15px;
+}
+
+.customNav {
+    background-color: #aaa5a563;
+}
+
+#compose-view {
+    padding: 15px;
+}
+
+#emails-view {
+    padding: 15px;
+}
+
+.helpBlock {
+    background: #ffd7d3;
+    color: #e61d25;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    text-align: left;
+    padding: 5px;
+}
+  
+.table tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.table tr {
+    cursor: pointer;
+}
+
+.content {
+    border: 1px solid #45464663;
+}
+
+.mailBody {
+    border-top: 1px solid #45464663;;
+    padding: 15px 3px;
+    margin-top: 10px;
+}
+
+.mailRead {
+    font-weight: bold;
+}
+
+.archiveButton {
+    margin-left: 10px;
+}

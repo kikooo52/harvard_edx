@@ -1,0 +1,22 @@
+{% extends "news/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<h3>Create News</h3>
+<form enctype="multipart/form-data" action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="form-group"> 
+        <label for="categories" class="requiredField">Category<span class="asteriskField">*</span> </label> 
+        <div>
+            <select name="categories" required multiple>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+        </div> 
+    </div>
+    <br><br>
+    <input type="submit" class="btn btn-primary">
+</form>
+{% endblock %}

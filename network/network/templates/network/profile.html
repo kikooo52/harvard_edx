@@ -1,0 +1,30 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <table class="postTable">
+        <tbody>
+            <tr>
+                <td style="width: 30%;" valign="top">
+                    <h3>{{ profile_user.username|title }}</h3>
+
+                    {% if user.username != profile_user.username %}
+                        {% if has_follower %}
+                            <a class="btn btn-primary" href="{% url 'unfollow' user_id=profile_user.id %}">Unfollow</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{% url 'follow' user_id=profile_user.id %}">Follow</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td style="width: 70%;" valign="top">
+                    <h5>{{ followers.count }} Followers</h5>
+                    <h5>{{ followings.count }} Followings</h5>                        
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    {% if profile_user.username == user.username %}
+        {% include 'network/create.html' %}
+    {% endif %}
+    {% include 'network/post_list.html' %}
+{% endblock %}

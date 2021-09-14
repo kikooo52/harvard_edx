@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h3>All sold listings:</h3>
+{% if listings %}
+    {% for listing in listings %} 
+        <div class="item">
+            <table class="listingTable">
+                <tbody>
+                    <tr>
+                        <td style="width:35%;">
+                            <a><img src="{{ listing.img_url }}" style="width:75%;"/></a>
+                        </td>
+                        <td style="width: 45%;" valign="top">
+                            <h2>Winner: {{ listing.winner }}</h2>
+                            <br>
+                            <h6>{{ listing.title }}</h6>
+                            <div>{{ listing.description }}</div>
+                            <div>Price: {{ listing.price }} $</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>No sold listings</div>
+{% endif %}
+{% endblock %}

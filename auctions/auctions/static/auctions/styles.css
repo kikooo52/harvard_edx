@@ -1,0 +1,30 @@
+body {
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.customNav {
+    border-bottom: 1px solid #80808063;
+}
+
+.auctionHeading img {
+    margin-left:10px;
+}
+
+.auctionHeading h1, .auctionHeading img {
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.item {
+    background-color: #ededed;
+    margin-top: 20px;
+    padding: 15px 10px 15px 10px;
+}
+
+.listingTable {
+    width: 100%;
+}

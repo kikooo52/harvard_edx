@@ -1,0 +1,39 @@
+body {
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.customNav {
+    border-bottom: 1px solid #80808063;
+}
+
+.networkHeading img {
+    margin-left:10px;
+}
+
+.networkHeading h1, .networkHeading img {
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.item {
+    background-color: #ededed;
+    margin-top: 20px;
+    padding: 15px 10px 15px 10px;
+}
+
+.postTable {
+    width: 100%;
+}
+
+
+.hasLikes:before {
+    color: red;
+}
+
+.noLikes:before {
+    color: grey;
+}

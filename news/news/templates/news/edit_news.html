@@ -1,0 +1,48 @@
+  
+{% extends "news/layout.html" %}
+
+{% block body %}
+    <h3>Edit news:</h3>
+    <div class="form">
+        <form enctype="multipart/form-data" id="createEntry" action="{% url 'edit_news' news.id %}" method="POST">
+            {% csrf_token %}
+            <div id="div_id_title" class="form-group"> <label for="id_title" class=" requiredField">Title<span class="asteriskField">*</span> </label>
+                <div class=""><input type="text" name="title" maxlength="255" required class="textinput textInput form-control" id="id_title" value="{{news.title}}"> </div>
+            </div>
+            <div id="div_id_slug" class="form-group"> <label for="id_slug" class=" requiredField">Slug
+                <span class="asteriskField">*</span></label><div ><input type="text" name="slug" class="textinput textInput form-control" required id="id_slug" value="{{news.slug}}"> </div>
+            </div>
+            <div id="div_id_content" class="form-group"> <label for="id_content" class=" requiredField">Content
+                <span class="asteriskField">*</span></label><div><textarea name="content" cols="40" rows="10" class="textarea form-control" required id="id_content">{{news.content}}</textarea> </div>
+            </div>
+            <div id="div_id_image" class="form-group"> <label for="id_image" class=" requiredField">Image</label>
+                <p class="file-upload">Currently: <a href="/media/news/210312072040-01-astrazeneca-covid-19-vaccine-italy-0308-large-tease.jpg">{{news.image.url}}</a><br>
+                <div><input type="file" name="image" class="clearablefileinput form-control-file" id="id_image"> </div>
+            </div>
+
+            <div class="form-group">
+                <div id="div_id_is_active" class="form-check">
+                    <input type="checkbox" name="is_active" class="checkboxinput form-check-input" id="id_is_active" {% if news.is_active %}checked{% endif %}>
+                    <label for="id_is_active" class="form-check-label">Is active</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="div_id_is_hot_news" class="form-check">
+                    <input type="checkbox" name="is_hot_news" class="checkboxinput form-check-input" id="id_is_hot_news" {% if news.is_hot_news %}checked{% endif %}>
+                    <label for="id_is_hot_news" class="form-check-label">Is hot news</label>
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label for="categories" class="requiredField">Category<span class="asteriskField">*</span> </label> 
+                <div>
+                    <select name="categories" required multiple>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% for n_category in news.category.all %}{% if n_category.id == category.id %}selected{% endif %}{% endfor %}>{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div> 
+            </div>
+            <button type="submit" class="btn btn-primary form">Change</button>
+        </form>
+    </div>
+{% endblock %}

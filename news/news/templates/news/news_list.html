@@ -1,0 +1,37 @@
+{% if all_news %}
+    {% for news in all_news %}
+    <div class="item">
+        <table class="newsTable">
+            <tbody>
+                <tr>
+                    <td style="width:30%;">
+                        <a href="{% url 'news_detail' news.slug %}" ><img src="{{ news.image.url }}" style="width:90%;"/></a>
+                    </td>
+                    <td style="width: 70%;" valign="top">
+                        <a class="newsTitle" href="{% url 'news_detail' news.slug %}" ><h2>{{ news.title }}</h2></a>
+                        <h6>By <a href="{% url 'profile' user_id=news.user.id %}">{{news.user|title}}</a></h6>
+                        <p>{{ news.get_short_excerpt }}</p>
+                        <div><i class="fa fa-clock-o" aria-hidden="true"></i> Updated {{ news.last_modified|date:"M d, Y H:i" }}</div>
+                        <br>
+                        {% if user.is_authenticated %}<i class="fa {% if news.bookmarks.all.count >= 1 %}fa-bookmark{% else %}fa-bookmark-o{% endif %} bookmarkNews" data-news-id="{{news.id}}" style="cursor: pointer;"></i>{% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    <br>
+    {% if all_news.has_previous %}
+        <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+        <a class="btn btn-primary" href="?page={{ all_news.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="current">
+        <strong>Page {{ all_news.number }} of {{ all_news.paginator.num_pages }}</strong>
+    </span>
+    {%if all_news.has_next %}
+        <a class="btn btn-primary" href="?page={{ all_news.next_page_number }}">next</a>
+        <a class="btn btn-primary"  href="?page={{ all_news.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+{% else %}
+    <div>No news</div>
+{% endif %}

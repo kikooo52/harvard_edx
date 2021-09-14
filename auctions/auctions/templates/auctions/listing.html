@@ -1,0 +1,63 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="item">
+    {% if user.is_authenticated %}
+    <table class="listingTable">
+        <tbody>
+            <tr>
+                <td style="width:35px;">
+                    <a href="{% url 'listing' listing.id %}" ><img src="{{ listing.img_url }}" style="width:75%;"/></a>
+                </td>
+                <td style="width: 65%;" valign="top">
+                    <h5>{{ listing.title }}</h5>
+                    <br>
+                    <div>{{ listing.description }}</div>
+                    <form action="{% url 'listing' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <input name="bid" type="number" min="{{ listing.price }}" placeholder="{{ listing.price }} $" min="{{ listing.price }}">
+                        <input type="submit" class="btn btn-primary" value="Bid">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    {% if owner %}
+                        <a href="{% url 'close' listing.id %}">Close Bid</a>
+                    {% endif %}
+                    <br>
+                    <a href="{% url 'bookmark' listing.id %}">{% if bookmark %}Remove from{% else %}Add in{% endif %} Watch List</a>
+                    <div>Owner: {{ listing.user }}</div>
+                    <div>Category: {{ category }}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <form action="{% url 'create_comment' listing.id %}" method="post">
+        {% csrf_token %}
+        <label for="comment">Add comment:</label>
+        <textarea id="comment" class="form-control" name="comment" rows="4" placeholder="Your Comment"></textarea>
+        <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
+    </form>
+    <hr>
+    <h6>Comments</h6>
+    {% for comment in comments %}
+    <div class="container">
+        <div class="card text-left">
+            <h6 class="card-header">{{comment.user}}</h6>
+            <div class="card-body">
+                <p>{{comment.comment}}</p>
+                <p>{{comment.timestamp|date:"M d, Y"}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    <div>Not signed in | <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'register' %}">Register</a></div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+body {
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.customNav {
+    border-bottom: 1px solid #80808063;
+    background: #ffe4e1;
+}
+
+.customNav ul li a {
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.customNav ul li a:hover {
+    color: #e30000 !important;
+}
+
+.newsHeading img {
+    margin-left:10px;
+}
+
+.newsHeading h1, .newsHeading img, .newsHeading form {
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.item {
+    background-color: #ededed;
+    margin-top: 20px;
+    padding: 15px 10px 15px 10px;
+}
+
+.newsTable {
+    width: 100%;
+}
+
+.newsTable img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.newsTable td {
+    padding: 15px;
+}
+.authSection a {
+    color: #48cfae;
+}
+.search {
+    width: 100%;
+}
+.newsTitle {
+    color: #000000;
+}
+.newsTitle:hover {
+    color: #e30000;
+    text-decoration: none;
+}
+
+
+.searchNews input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 13px 8px 30px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .searchNews input[type=text]:focus {
+    width: 100%;
+  }
+
+  @media all and (min-width: 992px) {
+	.navbar .nav-item .dropdown-menu{ display: none; }
+	.navbar .nav-item:hover .nav-link{ color: #fff;  }
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+}	

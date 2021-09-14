@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'network/main.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default customNav">
+            <div class="container-fluid">
+                <div class="networkHeading">
+                    <h1>Network</h1>
+                    <img src="{% static 'network/icon.jpg' %}" alt="Avatar" class="image">
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'following' %}">Following</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div>
+                    {% if user.is_authenticated %}
+                        <div>Signed in as <strong><a href="{% url 'profile' user_id=user.id %}">{{user|title}}</a></strong> | <a href="{% url 'logout' %}">Log Out</a></div>
+                    {% else %}
+                        <div>Not signed in | <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'register' %}">Register</a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <br>
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+            <!-- Button trigger modal -->
+            <button type="button" style="display: none;" class="btn btn-primary custom" id="buttonModal" data-toggle="modal" data-target="#exampleModal"></button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editFormModal" action="{% url 'edit_post' %}" method="post">
+                                {% csrf_token %}
+                                <textarea rows="6" class="form-control" id="editPostContent" name="content"></textarea>
+                                <input type="hidden" id="post_id" name="post_id" value="">
+                                <br>
+                                <input type="submit" class="btn btn-primary" value="Change">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

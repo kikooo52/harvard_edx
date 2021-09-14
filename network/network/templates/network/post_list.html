@@ -1,0 +1,38 @@
+{% if posts %}
+    {% for post in posts %} 
+        <div class="item">
+            <table class="postTable">
+                <tbody>
+                    <tr>
+                        <td style="width: 100%;" valign="top">
+                            <h4><a href="{% url 'profile' user_id=post.user.id %}">{{post.user|title}}</a></h4>
+                            <div class="postConent" data-post-id="{{post.id}}">{{ post.content }}</div>
+                            <br>
+                            <div>{{ post.created_at|date:"M d, Y H:i" }}</div>
+                            <br>
+                            {% if post.user == user %}
+                                <button class="edit-post-link btn btn-primary editPost">Edit</button>
+                                <br>
+                            {% endif %}
+                           <i class="fa fa-heart likePost {% if post.like.all.count >= 1 %}hasLikes{% else %}noLikes{% endif %}" style="cursor: pointer;"> {{ post.like.all.count }}</i> <span></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+    <br>
+    {% if posts.has_previous %}
+        <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+        <a class="btn btn-primary" href="?page={{ posts.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="current">
+        <strong>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</strong>
+    </span>
+    {%if posts.has_next %}
+        <a class="btn btn-primary" href="?page={{ posts.next_page_number }}">next</a>
+        <a class="btn btn-primary"  href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+{% else %}
+    <div>No post</div>
+{% endif %}

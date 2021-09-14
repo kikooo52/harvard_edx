@@ -1,0 +1,26 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>All Pages</h1>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+            <ul class="nav">
+                {% for entry in entries %}
+                    <li>
+                        <a class="entryList" href="{% url 'wiki' entry %}">
+                            <h5>{{ entry }}</h5>
+                        </a>
+                    </li>
+                    {% if not forloop.last %}
+                        |
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+{% endblock %}

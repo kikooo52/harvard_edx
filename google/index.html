@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Search</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="menuLink" href="index.html"><img src="logo.png" class="advLogo" /></a>
+        </div>
+        <ul class="nav navbar-nav" style="float: right;">
+          <li><a class="menuLink" href="images.html">Search Images</a></li>
+          <li><a class="menuLink" href="advanced.html">Advanced Search</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="logo">
+        <img src="logo.png"/>
+      </div>
+      <form action="https://google.com/search">
+        <input class="searchForm" type="text" name="q" />
+        <img class="search iconSearch" src="search.svg">
+        <img class="search iconMicro" src="micro.svg">
+        <div class="btns">
+          <button type="submit" class="btnSearch">Google Search</button>
+          <button type="submit" name="btnI" value="1" class="btnSearch">I'm Feeling Lucky</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

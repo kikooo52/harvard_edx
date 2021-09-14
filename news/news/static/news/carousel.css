@@ -1,0 +1,23 @@
+/* Slideshow container */
+#carouselExampleCaptions {
+  max-width: 600px;
+  position: relative;
+  margin: auto;
+  border-radius: 5px;
+  border: 4px solid #343a40;
+}
+.carousel-caption {
+  position: relative;
+  left: auto;
+  right: auto;
+  padding: 10px;
+} 
+.carousel-inner {
+  background-color: #343a40;
+}
+.carousel-inner .active{
+  background-color: #343a40;
+}
+.carousel-inner .newsTitle {
+  color: #fff;
+}

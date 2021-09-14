@@ -1,0 +1,72 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>New encyclopedia entry</h1>
+
+    <div class="form">
+        <form id="createEntry" action="{% url 'create' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" id="title" type="text" name="title" required>
+            </div>
+            <br>
+             <div class="form-group">
+                <label for="content" style="display:block">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="10" cols="25" required></textarea>
+            </div>
+            <br>
+            <button type="button" class="btn btn-primary form">Create</button>
+        </form>
+
+        <!-- Button trigger modal -->
+        <button type="button" style="display: none;" class="btn btn-primary custom" data-toggle="modal" data-target="#exampleModal"></button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        This entry already exists. Would you like to overwrite?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary yes">Yes</button>
+                        <button type="button" class="btn btn-secondary no" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <script type="text/javascript">
+        $(".btn.btn-primary.form").click( function() {
+            if (!$("#createEntry").valid()) {
+                return false;
+            }
+            var url = "check_entry/" +  $("#title").val();
+            $.get(url, function(data, status){
+                 if (data.entry_exist) {
+                     $('.btn.btn-primary.custom').trigger( "click" );
+                 } else {
+                     $("#createEntry").submit();
+                 }
+            });
+            $('.btn.btn-primary.yes').click(function() {
+                $("#createEntry").submit();
+            });
+            $('.btn.btn-primary.no').click(function() {
+                return false;
+            });
+        });
+    </script>
+
+{% endblock %}

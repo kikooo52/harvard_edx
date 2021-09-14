@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+code {
+    white-space: pre;
+}
+
+h1 {
+    margin-top: 0px;
+    padding-top: 20px;
+}
+
+textarea {
+    height: 60vh;
+    width: 80%;
+}
+
+.main {
+    padding: 10px;
+}
+
+.search {
+    width: 100%;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 5px;
+}
+
+a.entryList:hover {
+    text-decoration: none;
+}
+
+.content {
+    padding: .375rem .75rem;
+    background-color: #fff2f2;
+    border:none;
+    box-shadow:none;
+    outline:none;
+    cursor:default;
+    resize:none;
+    width: 60%;
+}
+
+form textarea {
+    height: auto;
+    width: auto;
+}
+
+div.form {
+    width: 60%;
+}
+
+.row {
+    margin-right: 0;
+}
+
+.nav li {
+    padding-right: 10px;
+    padding-left: 10px;
+}

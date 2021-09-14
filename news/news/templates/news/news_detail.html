@@ -1,0 +1,57 @@
+{% extends "news/layout.html" %}
+
+{% block body %}
+<div class="item">
+    <table class="newsTable">
+        <tbody>
+            <tr>
+                <td>
+                    <a href="{% url 'news_detail' news.slug %}" ><img src="{{ news.image.url }}" style="width:60%;"/></a>
+                </td>
+            </tr>        
+            <tr>
+                <td style="width: 100%;" valign="top">
+                    <h5>{{ news.title }}</h5>
+                    <br>
+                    <div>{{ news.content }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% if user.is_authenticated %}<i class="fa {% if news.bookmarks.all.count >= 1 %}fa-bookmark{% else %}fa-bookmark-o{% endif %} bookmarkNews" data-news-id="{{news.id}}" style="cursor: pointer;"></i>{% endif %}
+                    <div>By: <a href="{% url 'profile' user_id=news.user.id %}">{{ news.user }}</a></div>
+                    <div><i class="fa fa-clock-o" aria-hidden="true"></i> Updated {{ news.last_modified|date:"M d, Y H:i" }}</div>
+                    <div>Categories: {% for category in categories %}{{category|title}}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
+                    {% if news.user == user %}
+                        <br>
+                        <a class="edit-post-link btn btn-primary" href="{% url 'edit_news' news.id %}">Edit news</a>
+                    {% endif %}                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {% if user.is_authenticated %}
+    <form action="{% url 'create_comment' news.id %}" method="POST">
+        {% csrf_token %}
+        <label for="comment">Add comment:</label>
+        <textarea id="comment" class="form-control" name="comment" rows="4" placeholder="Your Comment"></textarea>
+        <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
+    </form>
+    {% endif %}
+    <hr>
+    <h6>Comments</h6>
+    {% for comment in comments %}
+    <div class="container">
+        <div class="card text-left">
+            <h6 class="card-header">{{comment.user}}</h6>
+            <div class="card-body">
+                <p>{{comment.comment}}</p>
+                <p>{{comment.timestamp|date:"M d, Y H:i"}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+
+{% endblock %}

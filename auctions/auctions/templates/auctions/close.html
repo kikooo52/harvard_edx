@@ -1,0 +1,28 @@
+{% extends "auctions/listing.html" %}
+
+{% block body %}
+<h3>Winner: {{winner}}</h3>
+<div class="item">
+    <table class="listingTable">
+        <tbody>
+            <tr>
+                <td style="width:35px;">
+                    <a href="{% url 'listing' listing.id %}" ><img src="{{ listing.img_url }}" style="width:75%;"/></a>
+                </td>
+                <td style="width: 65%;" valign="top">
+                    <h5>{{ listing.title }}</h5>
+                    <br>
+                    <div>{{ listing.description }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div>Owner: {{ listing.user }}</div>
+                    <div>Category: {{ category }}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

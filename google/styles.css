@@ -1,0 +1,125 @@
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.content form {
+  position: relative;
+}
+
+.content .searchForm {
+  width: 580px;
+  border: 1px solid #e4e4e4;
+  border-radius: 28px;
+  padding: 14px 45px;
+  display: flex;
+  font-size: 16px;
+}
+
+.content .searchForm:hover, .content .searchForm:focus {
+  box-shadow: 0 1px 6px 0 #20212447;
+  border-color: #dfe1e500;
+}
+
+.content .searchForm:focus {
+  outline: none;
+}
+
+.content .btns {
+  display: flex;
+  justify-content: center;
+}
+
+.content .btns .btnSearch {
+  padding: 0.8rem 1.2rem;
+  color: #000000de;
+  border: 1px solid transparent;
+  background: #f2f2f2;
+  margin: 1.7rem 0.3rem 2rem 0.3rem;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.content .search {
+  font-size: 1.2rem;
+  position: absolute;
+  color: #000000b8;
+  top: 15px;
+  right: 17px;
+}
+
+.content .iconMicro {
+  right: 17px;
+}
+
+.content .iconSearch {
+  left: 17px;
+}
+
+.logo {
+  position: relative;
+}
+
+.logo img {
+  width: 280px;
+  height: auto;
+  max-width: 60vh;
+  margin-bottom: 2rem;
+}
+
+.logo span {
+  position: absolute;
+  color: #4285f4;
+  bottom: 20px;
+  right: 5px;
+}
+
+.container-fluid .advLogo {
+  width: 100px;
+  padding: 10px;
+}
+
+.advancedHead {
+  border-bottom: 1px solid #f2f2f2;
+  padding: 1px 22px 22px;
+}
+
+.advancedHead h2 {
+  font-size: 20px;
+  font-weight: 100;
+  color: #d93025;
+}
+
+.advancedContent {
+  width: 70%;
+  padding: 26px 22px;
+}
+
+.advancedContent .textinput {
+  border: 1px solid #e4e4e4;
+  border-radius: 0;
+  padding: 6px 7px;
+  display: inline-block;
+  width: 35%;
+}
+
+.advancedContent label {
+  font-size: 13px;
+  display: inline-block;
+  width: 220px;
+  text-align: left;
+}

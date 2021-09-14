@@ -1,0 +1,16 @@
+  
+{% extends "news/layout.html" %}
+
+{% block body %}
+    <table class="newsTable">
+        <tbody>
+            <tr>
+                <td style="width: 30%;" valign="top">
+                    <h3>{{ profile_user.username|title }}</h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    {% include 'news/news_list.html' %}
+{% endblock %}

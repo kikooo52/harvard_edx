@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+{% load md2 %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>{{title}} Details</h1>
+    <br>
+    <div class="content">{{ content|markdown }}</div>
+    <br>
+    <a href="{% url 'edit' title %}">Edit content</a>
+{% endblock %}

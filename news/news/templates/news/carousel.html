@@ -1,0 +1,35 @@
+{% if hot_news %}
+<h5 style="text-align: center;">HOT NEWS</h5>
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {% for news in hot_news %}
+    <li data-target="#carouselExampleCaptions" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+  {% for news in hot_news %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <a href="{% url 'news_detail' news.slug %}" ><img src="{{ news.image.url }}" class="d-block w-100" alt="{{ news.title }}" style="width:100%"></a>
+      <div class="carousel-caption d-none d-md-block">
+        <br>
+        <a class="newsTitle" href="{% url 'news_detail' news.slug %}" ><h5>{{ news.title }}</h5></a>
+        <p>{{ news.get_short_excerpt }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+{% endif %}
+<script>
+  $('#carouselExampleCaptions').carousel({
+    interval: 2000
+  })
+</script>

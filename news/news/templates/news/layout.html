@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}News{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="{% static 'news/carousel.css' %}" rel="stylesheet">
+        <link href="{% static 'news/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'news/main.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light customNav">
+        <a href="{% url 'index' %}" class="image"><img src="{% static 'news/images/logo.png' %}" class="image"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'world_news' %}">World</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'europe_news' %}">Europe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sport_news' %}">Sport</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create' %}">Create News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bookmarked_news' user_id=user.id %}">Bookmarked News</a>
+                </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{% url 'categories' %}" id="navbarDropdown" role="button" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for category in categories %}
+                        <a class="dropdown-item" href="{% url 'category_news' category.pk %}">{{ category.title|title }}</a>
+                    {% endfor %}
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search_news' %}">
+                {% csrf_token %}
+                <div class="row no-gutters">
+                    <div class="col">
+                        <input class="form-control rounded-3" name="q" type="text" placeholder="Search News" value="{{query}}" >
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn " type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="authSection">
+                {% if user.is_authenticated %}
+                    <strong><div>Signed in as <a href="{% url 'profile' user_id=user.id %}">{{user|title}}</a> | <a href="{% url 'logout' %}">Log Out</a></strong></div>
+                {% else %}
+                    <div>Not signed in <strong>| <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'register' %}">Register</a></strong></div>
+                {% endif %}
+            </div>
+        </div>
+        </nav>
+        <br>
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h3>Watch List</h3>
+{% if watchlists %}
+    {% for watchlist in watchlists %} 
+        <div class="item">
+            <table class="listingTable">
+                <tbody>
+                    <tr>
+                        <td style="width:35%%;">
+                            <a href="{% url 'listing' watchlist.listing.id %}" ><img src="{{ watchlist.listing.img_url }}" style="width:75%;"/></a>
+                        </td>
+                        <td style="width: 45%;" valign="top">
+                            <h4>{{ watchlist.listing.title }}</h4>
+                            <div>{{ watchlist.listing.description }}</div>
+                            <div>Price: {{ watchlist.listing.price }} $</div>
+                            <div>By: {{ watchlist.listing.user }}</div>
+                            <div>{{ watchlist.listing.created_at|date:"M d, Y" }}</div>
+                        </td>
+                        <td style="width: 20%; padding-left: 30px;" valign="top">
+                            <a href="{% url 'listing' watchlist.listing.id %}" class="btn btn-primary" role="button" aria-pressed="true">View Item</a>
+                        </td>                            
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>Empty Watch List</div>
+{% endif %}
+{% endblock %}

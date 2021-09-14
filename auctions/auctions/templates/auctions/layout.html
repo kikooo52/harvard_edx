@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default customNav">
+            <div class="container-fluid">
+                <div class="auctionHeading">
+                    <h1>Auctions</h1>
+                    <img src="{% static 'auctions/icon.png' %}" alt="Avatar" class="image">
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create' %}">Create Listing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'watchlist' %}">Watch List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sold_listings' %}">Sold listings</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div>
+                    {% if user.is_authenticated %}
+                        <div>Signed in as <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Log Out</a></div>
+                    {% else %}
+                        <div>Not signed in | <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'register' %}">Register</a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <br>
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
